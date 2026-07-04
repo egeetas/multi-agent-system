@@ -1,3 +1,10 @@
+import os
+# Disable CrewAI telemetry and redirect all default OpenAI API routing locally to Ollama
+os.environ["CREWAI_TELEMETRY_OPT_OUT"] = "true"
+os.environ["OTEL_SDK_DISABLED"] = "true"
+os.environ["OPENAI_API_KEY"] = "fake-key-for-local-ollama"
+os.environ["OPENAI_API_BASE"] = "http://localhost:11434/v1"
+
 import time
 import json
 import queue
