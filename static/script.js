@@ -48,15 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Workflow Metadata
+    // Workflow Metadata with dynamic descriptions, tools and output variables
     const workflowMetadata = {
         writing: {
             title: "İçerik Yazımı (Yazı)",
             nodes: {
                 planner: {
                     name: "Planlayıcı Ajan",
+                    desc: "İstemi analiz ederek detaylı bir iş planı ve metodoloji sunar.",
+                    tools: ["İş Planlama", "Girdi Analizi"],
+                    output: "İş Akışı Planı",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="3" width="7" height="9" rx="1" />
                             <rect x="14" y="3" width="7" height="5" rx="1" />
                             <rect x="14" y="12" width="7" height="9" rx="1" />
@@ -66,8 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 researcher: {
                     name: "Araştırmacı Ajan",
+                    desc: "Plan doğrultusunda web kaynaklarını tarayarak derinlemesine araştırma bulguları toplar.",
+                    tools: ["Web Tarama", "Derin Arama"],
+                    output: "Araştırma Raporu",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8" />
                             <line x1="21" y1="21" x2="16.65" y2="16.65" />
                             <path d="M11 7a4 4 0 0 0-4 4" />
@@ -76,13 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 writer: {
                     name: "Yazar Ajan",
+                    desc: "Araştırma bulgularını ve planı birleştirerek nihai yayına hazır metin çıktısı üretir.",
+                    tools: ["Metin Sentezi", "Biçimlendirme"],
+                    output: "Nihai Rapor",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                             <polyline points="14 2 14 8 20 8" />
                             <line x1="16" y1="13" x2="8" y2="13" />
                             <line x1="16" y1="17" x2="8" y2="17" />
-                            <polyline points="10 9 9 9 8 9" />
                         </svg>
                     `
                 }
@@ -98,8 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
             nodes: {
                 planner: {
                     name: "Yazılımcı Ajan",
+                    desc: "Analiz edilen istek doğrultusunda algoritmik yapıyı tasarlar ve kaynak kodu geliştirir.",
+                    tools: ["Kod Yazımı", "Algoritma"],
+                    output: "kaynak_kod.py",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="16 18 22 12 16 6" />
                             <polyline points="8 6 2 12 8 18" />
                             <line x1="14" y1="4" x2="10" y2="20" />
@@ -108,8 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 researcher: {
                     name: "Denetçi Ajan",
+                    desc: "Yazılan kodu performans, bellek sızıntıları, güvenlik açıkları ve PEP8 standartları açısından inceler.",
+                    tools: ["Kod Denetimi", "Güvenlik"],
+                    output: "Denetim Raporu",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                             <polyline points="22 4 12 14.01 9 11.01" />
                         </svg>
@@ -117,8 +131,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 writer: {
                     name: "Testçi Ajan",
+                    desc: "Denetlenmiş kod için kapsamlı birim testleri (unit tests) hazırlar ve nihai entegrasyonu tamamlar.",
+                    tools: ["Pytest/Unittest", "Test Paketi"],
+                    output: "test_suites.py",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
                         </svg>
                     `
@@ -135,8 +152,11 @@ document.addEventListener("DOMContentLoaded", () => {
             nodes: {
                 planner: {
                     name: "Pazar Analisti",
+                    desc: "İş fikrini veya sektörü tarayarak pazar büyüklüğünü, rakip analizini ve pazar eğilimlerini sunar.",
+                    tools: ["Pazar Analizi", "Eğilimler"],
+                    output: "Pazar Raporu",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="18" y1="20" x2="18" y2="10" />
                             <line x1="12" y1="20" x2="12" y2="4" />
                             <line x1="6" y1="20" x2="6" y2="14" />
@@ -145,8 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 researcher: {
                     name: "Stratejist Ajan",
+                    desc: "Toplanan verilerle SWOT analizi hazırlar ve güçlü/zayıf yönler ile fırsat/tehdit matrisini kurgular.",
+                    tools: ["SWOT Matrisi", "Risk Analizi"],
+                    output: "SWOT Raporu",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10" />
                             <circle cx="12" cy="12" r="4" />
                             <line x1="12" y1="2" x2="12" y2="4" />
@@ -158,8 +181,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 writer: {
                     name: "İş Danışmanı",
+                    desc: "Gelir modellerini, pazara giriş stratejilerini ve büyüme yol haritasını detaylandırır.",
+                    tools: ["Yol Haritası", "Finansal Model"],
+                    output: "İş Stratejisi",
                     icon: `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
                             <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
                             <line x1="12" y1="22.08" x2="12" y2="12" />
@@ -213,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnDownloadMd = document.getElementById("btnDownloadMd");
     const btnDownloadPdf = document.getElementById("btnDownloadPdf");
     
-    // Nodes DOM elements references
+    // Nodes DOM elements references (Cards)
     const nodes = {
         planner: document.getElementById("node-planner"),
         researcher: document.getElementById("node-researcher"),
@@ -275,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
             selectedWorkflowText.textContent = option.textContent;
             workflowDropdown.classList.remove("open");
             
-            // Dynamically change layout configurations (Labels, Icons, Info cards)
+            // Dynamically change layout configurations (Labels, Icons, Info cards, tools, desc)
             updateWorkflowUI(value);
         });
     });
@@ -287,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update Info card list
         workflowInfoList.innerHTML = metadata.info;
         
-        // Update nodes titles and SVGs
+        // Update nodes titles, SVGs, descriptions, tools and outputs
         Object.keys(nodes).forEach(key => {
             if (nodeNames[key] && metadata.nodes[key]) {
                 nodeNames[key].textContent = metadata.nodes[key].name;
@@ -295,10 +321,25 @@ document.addEventListener("DOMContentLoaded", () => {
             if (nodeIcons[key] && metadata.nodes[key]) {
                 nodeIcons[key].innerHTML = metadata.nodes[key].icon;
             }
+            
+            // Update description text
+            const descEl = document.getElementById(`desc-${key}`);
+            if (descEl && metadata.nodes[key].desc) {
+                descEl.textContent = metadata.nodes[key].desc;
+            }
+            
+            // Update tools badges
+            const toolsEl = document.getElementById(`tools-${key}`);
+            if (toolsEl && metadata.nodes[key].tools) {
+                toolsEl.innerHTML = metadata.nodes[key].tools.map(tool => `<span class="badge-tool">${tool}</span>`).join('');
+            }
+            
+            // Update output filenames
+            const outEl = document.getElementById(`out-${key}`);
+            if (outEl && metadata.nodes[key].output) {
+                outEl.textContent = metadata.nodes[key].output;
+            }
         });
-        
-        // Align connection lines based on new SVG shapes inside icons
-        setTimeout(updateConnectionLines, 50);
     }
 
     // --- OLLAMA API CONNECTION CHECK ---
@@ -449,21 +490,46 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- VIEWPORT VISUAL RESET ---
 
     function resetVisualStates() {
-        Object.values(nodes).forEach(node => {
-            node.className = "agent-node";
-            node.querySelector(".node-status").textContent = "Beklemede";
+        // Reset Cards: Planner is active but Waiting, others are locked
+        Object.keys(nodes).forEach(key => {
+            const card = nodes[key];
+            const badge = document.getElementById("badge-" + key);
+            
+            if (key === "planner") {
+                card.className = "flow-card active";
+                if (badge) {
+                    badge.className = "card-status-badge badge-waiting";
+                    badge.textContent = "BEKLEMEDE";
+                }
+            } else {
+                card.className = "flow-card locked";
+                if (badge) {
+                    badge.className = "card-status-badge badge-locked";
+                    badge.textContent = "KİLİTLİ";
+                }
+            }
         });
         
-        document.querySelectorAll(".flow-line").forEach(line => line.classList.remove("active"));
-        document.querySelectorAll(".glowing-particle").forEach(p => p.remove());
+        // Reset Complete card
+        const completeCard = document.getElementById("flow-card-complete");
+        if (completeCard) {
+            completeCard.className = "flow-card locked";
+        }
+        
+        // Reset Timeline Nodes: step 1 is active, others locked
+        document.querySelectorAll(".timeline-node").forEach(node => {
+            const step = node.dataset.step;
+            if (step === "1") {
+                node.className = "timeline-node active";
+            } else {
+                node.className = "timeline-node locked";
+            }
+        });
 
         reportButtonContainer.classList.remove("show");
         setTimeout(() => {
             reportButtonContainer.style.display = "none";
         }, 400);
-        
-        // Re-align lines
-        setTimeout(updateConnectionLines, 50);
     }
 
     function getTimestamp() {
@@ -494,75 +560,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return card;
     }
 
-    function animateDataFlow(fromAgent, toAgent) {
-        let lineId = (fromAgent === "planner" && toAgent === "researcher") ? "line-p-r" : "line-r-w";
-        const line = document.getElementById(lineId);
-        if (line) line.classList.add("active");
-
-        // Determine particle color based on workflow accent colors
-        const particleColor = fromAgent === "planner" ? "var(--primary)" : "var(--accent-indigo)";
-
-        // Launch a stream of 4 particles sequentially with slight delay
-        for (let i = 0; i < 4; i++) {
-            setTimeout(() => {
-                createSingleFlowParticle(fromAgent, toAgent, particleColor);
-            }, i * 180);
-        }
-
-        // Keep connection line highlighted until last particle arrives
-        setTimeout(() => {
-            if (line) line.classList.remove("active");
-        }, 1200 + (3 * 180) + 100);
-    }
-
-    function createSingleFlowParticle(fromAgent, toAgent, color) {
-        const fromNode = nodes[fromAgent];
-        const toNode = nodes[toAgent];
-        
-        if (!fromNode || !toNode) return;
-        
-        const container = document.querySelector(".graph-container");
-        const containerRect = container.getBoundingClientRect();
-        
-        const fromRect = fromNode.getBoundingClientRect();
-        const toRect = toNode.getBoundingClientRect();
-        
-        const startX = (fromRect.left + fromRect.width / 2) - containerRect.left;
-        const startY = (fromRect.top + fromRect.height / 2) - containerRect.top;
-        const endX = (toRect.left + toRect.width / 2) - containerRect.left;
-        const endY = (toRect.top + toRect.height / 2) - containerRect.top;
-        
-        const particle = document.createElement("div");
-        particle.className = "glowing-particle";
-        
-        Object.assign(particle.style, {
-            position: 'absolute',
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: color,
-            boxShadow: `0 0 8px ${color}, 0 0 16px ${color}`,
-            left: `${startX - 4}px`,
-            top: `${startY - 4}px`,
-            zIndex: '10',
-            opacity: '0.9',
-            transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        });
-        
-        container.appendChild(particle);
-        
-        particle.offsetHeight; // Force reflow
-        
-        particle.style.left = `${endX - 4}px`;
-        particle.style.top = `${endY - 4}px`;
-        
-        setTimeout(() => {
-            particle.style.opacity = '0';
-            setTimeout(() => {
-                particle.remove();
-            }, 300);
-        }, 1200);
-    }
+    // Legacy no-op placeholder to prevent WS script exceptions
+    function animateDataFlow(fromAgent, toAgent) {}
 
     // Enter key triggers run
     agentPrompt.addEventListener("keydown", (e) => {
@@ -614,9 +613,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 case "start":
                     const activeNode = nodes[data.agent];
                     if (activeNode) {
+                        activeNode.classList.remove("locked");
                         activeNode.classList.add("active");
-                        activeNode.querySelector(".node-status").textContent = "Çalışıyor...";
+                        
+                        const badge = document.getElementById("badge-" + data.agent);
+                        if (badge) {
+                            badge.className = "card-status-badge badge-running";
+                            badge.textContent = "ÇALIŞIYOR";
+                        }
                     }
+                    
+                    // Activate timeline steps
+                    const stepNum = data.agent === "planner" ? "1" : (data.agent === "researcher" ? "2" : "3");
+                    const timeNode = document.getElementById("time-node-" + stepNum);
+                    if (timeNode) {
+                        timeNode.classList.remove("locked", "complete");
+                        timeNode.classList.add("active");
+                    }
+                    
                     currentLogCard = createLogCard(data.agent);
                     break;
                     
@@ -638,14 +652,66 @@ document.addEventListener("DOMContentLoaded", () => {
                     const compNode = nodes[data.agent];
                     if (compNode) {
                         compNode.classList.remove("active");
-                        compNode.classList.add("complete");
-                        compNode.querySelector(".node-status").textContent = "Tamamlandı";
+                        
+                        const badge = document.getElementById("badge-" + data.agent);
+                        if (badge) {
+                            badge.className = "card-status-badge badge-complete";
+                            badge.textContent = "TAMAMLANDI";
+                        }
+                    }
+                    
+                    // Complete timeline step node
+                    const cStepNum = data.agent === "planner" ? "1" : (data.agent === "researcher" ? "2" : "3");
+                    const cTimeNode = document.getElementById("time-node-" + cStepNum);
+                    if (cTimeNode) {
+                        cTimeNode.classList.remove("active");
+                        cTimeNode.classList.add("complete");
+                    }
+                    
+                    // AUTO-REVEAL NEXT SEQUENCE STEP
+                    let nextAgent = "";
+                    let nextStep = "";
+                    if (data.agent === "planner") {
+                        nextAgent = "researcher";
+                        nextStep = "2";
+                    } else if (data.agent === "researcher") {
+                        nextAgent = "writer";
+                        nextStep = "3";
+                    } else if (data.agent === "writer") {
+                        nextAgent = "complete";
+                        nextStep = "complete";
+                    }
+                    
+                    if (nextAgent === "complete") {
+                        const completeCard = document.getElementById("flow-card-complete");
+                        if (completeCard) {
+                            completeCard.classList.remove("locked");
+                            completeCard.classList.add("active");
+                        }
+                        const completeTimeNode = document.getElementById("time-node-complete");
+                        if (completeTimeNode) {
+                            completeTimeNode.classList.remove("locked");
+                            completeTimeNode.classList.add("complete");
+                        }
+                    } else if (nextAgent !== "") {
+                        const nextNode = nodes[nextAgent];
+                        if (nextNode) {
+                            nextNode.classList.remove("locked");
+                            const nextBadge = document.getElementById("badge-" + nextAgent);
+                            if (nextBadge) {
+                                nextBadge.className = "card-status-badge badge-waiting";
+                                nextBadge.textContent = "BEKLEMEDE";
+                            }
+                        }
+                        const nextTimeNode = document.getElementById("time-node-" + nextStep);
+                        if (nextTimeNode) {
+                            nextTimeNode.classList.remove("locked");
+                            nextTimeNode.classList.add("active");
+                        }
                     }
                     break;
                     
                 case "send_data":
-                    animateDataFlow(data.from, data.to);
-                    
                     const sysCard = document.createElement("div");
                     sysCard.className = "log-entry";
                     sysCard.style.borderLeft = "3px solid var(--primary)";
@@ -821,58 +887,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-
-    // --- DYNAMIC SVG CONNECTOR LINE ALIGNMENT ---
-    function updateConnectionLines() {
-        const container = document.querySelector(".graph-container");
-        if (!container) return;
-        const containerRect = container.getBoundingClientRect();
-        
-        const linePR = document.getElementById("line-p-r");
-        const lineRW = document.getElementById("line-r-w");
-        
-        const iconP = document.getElementById("icon-planner");
-        const iconR = document.getElementById("icon-researcher");
-        const iconW = document.getElementById("icon-writer");
-        
-        if (!iconP || !iconR || !iconW) return;
-        
-        const rectP = iconP.getBoundingClientRect();
-        const rectR = iconR.getBoundingClientRect();
-        const rectW = iconW.getBoundingClientRect();
-        
-        // Calculate coordinate centers of the circular agent icons relative to parent container
-        const xP = (rectP.left + rectP.width / 2) - containerRect.left;
-        const yP_bottom = rectP.bottom - containerRect.top;
-        
-        const xR = (rectR.left + rectR.width / 2) - containerRect.left;
-        const yR_top = rectR.top - containerRect.top;
-        const yR_bottom = rectR.bottom - containerRect.top;
-        
-        const xW = (rectW.left + rectW.width / 2) - containerRect.left;
-        const yW_top = rectW.top - containerRect.top;
-        
-        // Update SVG line attributes (leaving a 4px gap for high-tech aesthetic)
-        if (linePR) {
-            linePR.setAttribute("x1", xP);
-            linePR.setAttribute("y1", yP_bottom + 4);
-            linePR.setAttribute("x2", xR);
-            linePR.setAttribute("y2", yR_top - 4);
-        }
-        
-        if (lineRW) {
-            lineRW.setAttribute("x1", xR);
-            lineRW.setAttribute("y1", yR_bottom + 4);
-            lineRW.setAttribute("x2", xW);
-            lineRW.setAttribute("y2", yW_top - 4);
-        }
-    }
-
-    // Call layout update on resize
-    window.addEventListener("resize", updateConnectionLines);
-    
-    // Initial call to align lines correctly
-    setTimeout(updateConnectionLines, 200);
 
     function cleanup() {
         btnRun.disabled = false;

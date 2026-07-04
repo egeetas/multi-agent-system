@@ -110,69 +110,173 @@
             <section class="panel glass-panel visualizer-panel" aria-labelledby="visualizer-title">
                 <h2 id="visualizer-title" class="panel-title">Ajan Akış Grafiği</h2>
                 
-                <div class="graph-container">
-                    <!-- SVG lines for connections -->
-                    <svg class="graph-lines" id="graphLines">
-                        <!-- Line 1: Planner to Researcher -->
-                        <line id="line-p-r" x1="50%" y1="22%" x2="50%" y2="41%" class="flow-line" />
-                        <!-- Line 2: Researcher to Writer -->
-                        <line id="line-r-w" x1="50%" y1="59%" x2="50%" y2="78%" class="flow-line" />
-                    </svg>
-
-                    <!-- Agent Nodes -->
-                    <div class="agent-nodes">
-                        <!-- Planner / Coder / Analyst Agent -->
-                        <div class="agent-node" id="node-planner" data-agent="planner">
-                            <div class="node-icon" id="icon-planner">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
-                                    <rect x="3" y="3" width="7" height="9" rx="1" />
-                                    <rect x="14" y="3" width="7" height="5" rx="1" />
-                                    <rect x="14" y="12" width="7" height="9" rx="1" />
-                                    <path d="M10 7h4M10 16h4" />
-                                </svg>
-                            </div>
-                            <div class="node-info">
-                                <span class="node-name" id="name-planner">Planlayıcı Ajan</span>
-                                <span class="node-status">Beklemede</span>
-                            </div>
+                <div class="agent-flow-layout">
+                    <!-- Vertical Timeline Track -->
+                    <div class="flow-timeline">
+                        <div class="timeline-track-line"></div>
+                        
+                        <div class="timeline-node active" id="time-node-1" data-step="1">
+                            <div class="node-pulse"></div>
+                            <span class="node-num">01</span>
                         </div>
-
-                        <!-- Researcher / Reviewer / Strategist Agent -->
-                        <div class="agent-node" id="node-researcher" data-agent="researcher">
-                            <div class="node-icon" id="icon-researcher">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
-                                    <circle cx="11" cy="11" r="8" />
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                    <path d="M11 7a4 4 0 0 0-4 4" />
-                                </svg>
-                            </div>
-                            <div class="node-info">
-                                <span class="node-name" id="name-researcher">Araştırmacı Ajan</span>
-                                <span class="node-status">Beklemede</span>
-                            </div>
+                        <div class="timeline-node locked" id="time-node-2" data-step="2">
+                            <div class="node-pulse"></div>
+                            <span class="node-num">02</span>
                         </div>
-
-                        <!-- Writer / Tester / Consultant Agent -->
-                        <div class="agent-node" id="node-writer" data-agent="writer">
-                            <div class="node-icon" id="icon-writer">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="agent-svg-icon">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                    <polyline points="14 2 14 8 20 8" />
-                                    <line x1="16" y1="13" x2="8" y2="13" />
-                                    <line x1="16" y1="17" x2="8" y2="17" />
-                                    <polyline points="10 9 9 9 8 9" />
+                        <div class="timeline-node locked" id="time-node-3" data-step="3">
+                            <div class="node-pulse"></div>
+                            <span class="node-num">03</span>
+                        </div>
+                        
+                        <div class="timeline-node locked" id="time-node-complete" data-step="complete">
+                            <div class="node-check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
                                 </svg>
-                            </div>
-                            <div class="node-info">
-                                <span class="node-name" id="name-writer">Yazar Ajan</span>
-                                <span class="node-status">Beklemede</span>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Glowing Action Button for Final Report (Apple Glass style popover trigger) -->
-                    <div id="reportButtonContainer" class="report-btn-container" style="display: none;">
-                        <button id="btnShowReport" class="btn btn-primary glowing-btn">Nihai Raporu Görüntüle</button>
+                    
+                    <!-- Timeline Cards -->
+                    <div class="flow-cards">
+                        <!-- Card 1: Planner / Coder / Analyst -->
+                        <div class="flow-card active" id="node-planner" data-agent="planner">
+                            <div class="card-main">
+                                <div class="card-left-section">
+                                    <div class="card-icon" id="icon-planner">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="7" height="9" rx="1" />
+                                            <rect x="14" y="3" width="7" height="5" rx="1" />
+                                            <rect x="14" y="12" width="7" height="9" rx="1" />
+                                            <path d="M10 7h4M10 16h4" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="card-right-section">
+                                    <div class="card-header-bar">
+                                        <div class="card-title-group">
+                                            <h3 class="card-agent-name" id="name-planner">Planlayıcı Ajan</h3>
+                                            <span class="card-status-badge badge-waiting" id="badge-planner">BEKLEMEDE</span>
+                                        </div>
+                                        <div class="card-spinner"></div>
+                                    </div>
+                                    <p class="card-description" id="desc-planner">İstemi analiz ederek detaylı bir iş planı ve metodoloji sunar.</p>
+                                </div>
+                            </div>
+                            <div class="card-divider"></div>
+                            <div class="card-footer">
+                                <div class="card-footer-col">
+                                    <span class="footer-label">ARAÇLAR</span>
+                                    <div class="badge-row" id="tools-planner">
+                                        <span class="badge-tool">İş Planlama</span>
+                                        <span class="badge-tool">Girdi Analizi</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer-col">
+                                    <span class="footer-label">ÇIKTI</span>
+                                    <div class="output-file">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="file-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        <span class="output-filename" id="out-planner">İş Akışı Planı</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 2: Researcher / Reviewer / Strategist -->
+                        <div class="flow-card locked" id="node-researcher" data-agent="researcher">
+                            <div class="card-main">
+                                <div class="card-left-section">
+                                    <div class="card-icon" id="icon-researcher">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                            <path d="M11 7a4 4 0 0 0-4 4" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="card-right-section">
+                                    <div class="card-header-bar">
+                                        <div class="card-title-group">
+                                            <h3 class="card-agent-name" id="name-researcher">Araştırmacı Ajan</h3>
+                                            <span class="card-status-badge badge-locked" id="badge-researcher">KİLİTLİ</span>
+                                        </div>
+                                        <div class="card-spinner"></div>
+                                    </div>
+                                    <p class="card-description" id="desc-researcher">Plan doğrultusunda web kaynaklarını tarayarak derinlemesine araştırma bulguları toplar.</p>
+                                </div>
+                            </div>
+                            <div class="card-divider"></div>
+                            <div class="card-footer">
+                                <div class="card-footer-col">
+                                    <span class="footer-label">ARAÇLAR</span>
+                                    <div class="badge-row" id="tools-researcher">
+                                        <span class="badge-tool">Web Tarama</span>
+                                        <span class="badge-tool">Derin Arama</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer-col">
+                                    <span class="footer-label">ÇIKTI</span>
+                                    <div class="output-file">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="file-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        <span class="output-filename" id="out-researcher">Araştırma Raporu</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 3: Writer / Tester / Consultant -->
+                        <div class="flow-card locked" id="node-writer" data-agent="writer">
+                            <div class="card-main">
+                                <div class="card-left-section">
+                                    <div class="card-icon" id="icon-writer">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                            <polyline points="14 2 14 8 20 8" />
+                                            <line x1="16" y1="13" x2="8" y2="13" />
+                                            <line x1="16" y1="17" x2="8" y2="17" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="card-right-section">
+                                    <div class="card-header-bar">
+                                        <div class="card-title-group">
+                                            <h3 class="card-agent-name" id="name-writer">Yazar Ajan</h3>
+                                            <span class="card-status-badge badge-locked" id="badge-writer">KİLİTLİ</span>
+                                        </div>
+                                        <div class="card-spinner"></div>
+                                    </div>
+                                    <p class="card-description" id="desc-writer">Araştırma bulgularını ve planı birleştirerek nihai yayına hazır metin çıktısı üretir.</p>
+                                </div>
+                            </div>
+                            <div class="card-divider"></div>
+                            <div class="card-footer">
+                                <div class="card-footer-col">
+                                    <span class="footer-label">ARAÇLAR</span>
+                                    <div class="badge-row" id="tools-writer">
+                                        <span class="badge-tool">Metin Sentezi</span>
+                                        <span class="badge-tool">Biçimlendirme</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer-col">
+                                    <span class="footer-label">ÇIKTI</span>
+                                    <div class="output-file">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="file-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        <span class="output-filename" id="out-writer">Nihai Rapor</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 4: Workflow Complete -->
+                        <div class="flow-card locked" id="flow-card-complete">
+                            <div class="complete-message-container">
+                                <h3 class="complete-title">İş Akışı Başarıyla Tamamlandı</h3>
+                                <p class="complete-desc">Tüm yapay zeka ajanları üzerlerine düşen görevleri başarıyla tamamladı.</p>
+                                <div id="reportButtonContainer" class="report-btn-container" style="display: none; margin-top: 14px;">
+                                    <button id="btnShowReport" class="btn btn-primary glowing-btn">Nihai Raporu Görüntüle</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
