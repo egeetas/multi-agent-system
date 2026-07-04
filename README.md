@@ -119,4 +119,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-Created with ❤️ by [Ege Taş](https://github.com/egeetas)
+Created by [Ege Taş](https://github.com/egeetas)
