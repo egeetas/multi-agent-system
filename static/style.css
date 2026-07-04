@@ -909,14 +909,14 @@ textarea.form-control {
     display: none;
 }
 
-.flow-card.active .card-spinner {
+.flow-card.running .card-spinner {
     display: block;
     animation: card-spin 0.8s linear infinite;
 }
 
-.flow-card.active[data-agent="planner"] .card-spinner { color: var(--primary); }
-.flow-card.active[data-agent="researcher"] .card-spinner { color: var(--accent-indigo); }
-.flow-card.active[data-agent="writer"] .card-spinner { color: var(--accent-purple); }
+.flow-card.running[data-agent="planner"] .card-spinner { color: var(--primary); }
+.flow-card.running[data-agent="researcher"] .card-spinner { color: var(--accent-indigo); }
+.flow-card.running[data-agent="writer"] .card-spinner { color: var(--accent-purple); }
 
 @keyframes card-spin {
     to { transform: rotate(360deg); }

@@ -496,7 +496,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const badge = document.getElementById("badge-" + key);
             
             if (key === "planner") {
-                card.className = "flow-card active";
+                card.className = "flow-card";
                 if (badge) {
                     badge.className = "card-status-badge badge-waiting";
                     badge.textContent = "BEKLEMEDE";
