@@ -5,7 +5,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-High%20Performance-green?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-> **Multi-Agent Orchestrator** is a high-performance, local-first agentic platform featuring an **Apple Vision Pro (Glassmorphism) UI** and **Perplexity/Gemini aesthetics**. Powered by **CrewAI**, **FastAPI WebSockets**, and **Ollama**, it enables multiple open-source LLMs to plan, research, write code, run code reviews, and draft business strategy roadmaps collaboratively with zero cloud dependency and absolute data privacy.
+> **Multi-Agent Orchestrator** is a high-performance, local-first agentic platform. Powered by **CrewAI**, **FastAPI WebSockets**, and **Ollama**, it enables multiple open-source LLMs to plan, research, write code, run code reviews, and draft business strategy roadmaps collaboratively with zero cloud dependency and absolute data privacy.
 
 https://github.com/egeetas/multi-agent-system.git
 
