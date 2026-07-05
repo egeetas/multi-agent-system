@@ -222,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const agentPrompt = document.getElementById("agentPrompt");
     const btnRun = document.getElementById("btnRun");
     const btnReset = document.getElementById("btnReset");
+    const btnPreview = document.getElementById("btnPreview");
     const systemStatus = document.getElementById("systemStatus");
     const logsContainer = document.getElementById("logsContainer");
     const workflowInfoList = document.getElementById("workflowInfoList");
@@ -264,6 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let selectedWorkflowValue = "writing"; // Stores active workflow (writing / coding / business)
     let uploadedFileText = "";        // Stores extracted text content of the uploaded document
     let finalRawMarkdown = "";        // Holds raw markdown output for copying/saving
+    let isPreviewOpen = false;
 
     // --- CUSTOM DROPDOWNS MANAGEMENT ---
 
@@ -490,6 +492,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- VIEWPORT VISUAL RESET ---
 
     function resetVisualStates() {
+        // Reset preview state
+        isPreviewOpen = false;
+        if (btnPreview) {
+            btnPreview.textContent = "Ajanları Önizle";
+            btnPreview.style.borderColor = "";
+            btnPreview.style.color = "";
+        }
+
         // Reset Cards: Planner is active but Waiting, others are locked
         Object.keys(nodes).forEach(key => {
             const card = nodes[key];
@@ -582,6 +592,7 @@ document.addEventListener("DOMContentLoaded", () => {
         resetVisualStates();
         logsContainer.innerHTML = "";
         btnRun.disabled = true;
+        if (btnPreview) btnPreview.disabled = true;
         
         // Lock config widgets during run
         modelDropdownTrigger.style.pointerEvents = "none";
@@ -890,6 +901,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function cleanup() {
         btnRun.disabled = false;
+        if (btnPreview) btnPreview.disabled = false;
         
         // Unlock config widgets
         modelDropdownTrigger.style.pointerEvents = "auto";
@@ -902,4 +914,41 @@ document.addEventListener("DOMContentLoaded", () => {
         agentPrompt.disabled = false;
         if (ws) ws = null;
     }
+    // --- PREVIEW AGENTS WORKFLOW ---
+    btnPreview.addEventListener("click", () => {
+        if (btnRun.disabled) return; // Ignore clicks if crew is running
+        
+        if (!isPreviewOpen) {
+            // Unlock all workflow cards in BEKLEMEDE state
+            Object.keys(nodes).forEach(key => {
+                const card = nodes[key];
+                const badge = document.getElementById("badge-" + key);
+                
+                card.classList.remove("locked");
+                if (badge) {
+                    badge.className = "card-status-badge badge-waiting";
+                    badge.textContent = "BEKLEMEDE";
+                }
+            });
+            
+            // Show Workflow Complete card too so they can see the final report button placement
+            const completeCard = document.getElementById("flow-card-complete");
+            if (completeCard) {
+                completeCard.classList.remove("locked");
+            }
+            
+            // Unlock all timeline step indicators visually
+            document.querySelectorAll(".timeline-node").forEach(node => {
+                node.classList.remove("locked");
+            });
+            
+            btnPreview.textContent = "Önizlemeyi Kapat";
+            btnPreview.style.borderColor = "var(--primary)";
+            btnPreview.style.color = "var(--primary)";
+            isPreviewOpen = true;
+        } else {
+            // Re-lock all cards and restore initial state
+            resetVisualStates();
+        }
+    });
 });
