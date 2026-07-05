@@ -948,19 +948,23 @@ textarea.form-control {
 }
 
 /* Floating Action Button for Final Report (Apple Glass trigger) */
+/* Final Report Button styling - positioned cleanly below complete text */
 .report-btn-container {
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    width: 100%;
     z-index: 10;
     opacity: 0;
+    transform: translateY(10px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
 }
 
 .report-btn-container.show {
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
 }
